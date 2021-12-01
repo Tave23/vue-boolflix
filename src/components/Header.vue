@@ -7,23 +7,64 @@
     </div>
 
     <div class="input-header">
-      <input class="form-control" type="text" placeholder="Inserisci il nome di un film...">
-      <button type="button" class="button-input">Cerca</button>
+      <!-- input title film -->
+      <input 
+      v-model="userFilm"
+      class="form-control" 
+      type="text" placeholder="Inserisci il nome di un film...">
+      <!-- button -->
+      <button 
+      @click="getApi"
+      type="button" 
+      class="button-input">Cerca</button>
     </div>
 
   </div>
 </template>
 
 <script>
+
+import axios from 'axios'
+
 export default {
   name: 'Header',
   props: {
     
+  },
+  data(){
+    return{
+      userFilm: '',
+      listFilms: [],
+      keyUrlApi: 'api_key=e99307154c6dfb0b4750f6603256716d',
+    }
+  },
+  methods:{
+      getApi(){
+
+      axios.get(`https://api.themoviedb.org/3/search/movie?${this.keyUrlApi}&query=${this.userFilm}`)
+      .then(r =>{
+        this.isLoading = true;
+
+        this.isLoading = r.data.results;
+        console.log(this.isLoading);
+      })
+      .catch( e => {
+        console.log(e);
+      })
+
+    }
   }
 }
+
+
 </script>
 
+
+
+
 <style scoped lang="scss">
+
+@import '../assets/style/vars.scss';
 
 .header{
   height: 80px;
@@ -43,28 +84,27 @@ export default {
   padding: 10px;
 }
 
-
-
 .logo-header img{
   width: 28%;
   cursor: pointer;
 }
 
 h1{
-  color: #F00800;
+  color: $button-bg-color;
   padding-left: 20px;
   cursor: pointer;
 }
 
 .button-input{
-  background-color: #F00800;
+  background-color: $button-bg-color;
   border: none;
   padding: 5px;
   color: white;
   margin-left: 10px;
 }
 
-.button-input:active{
-  background-color: #b40802;
+.button-input:active,
+.button-input:hover{
+  background-color: $active-btn;
 }
 </style>
