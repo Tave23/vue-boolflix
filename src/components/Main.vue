@@ -29,6 +29,7 @@ export default {
    background: rgb(0,0,0);
    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(255,10,0,1) 100%);
    overflow-y: scroll;
+   padding: 100px 10px;
 }
 
 </style>
