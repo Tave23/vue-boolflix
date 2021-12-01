@@ -2,6 +2,7 @@
   <div id="app">
     
     <Header @search= 'searchFilm' @searchTv= 'searchSeries'/>
+    <!-- @loadingTv= 'loaderTv' @loadingSerie= 'loaderSerie' -->
     <Main :researchFilmMain='listFilms2' :researchSeriesMain='listSeries2'/>
 
   </div>
@@ -37,7 +38,15 @@ export default {
 
       this.listSeries2 = listSeries
       console.log('nuovo array dentro app.vue ',this.listFilms2);
-    }
+    },
+
+    // loaderTv(isLoadingTv){
+    //   console.log('app.vue loader tv', isLoadingTv);
+    // },
+
+    // loaderSerie(isLoadingSerie){
+    //   console.log('app.vue loader serie', isLoadingSerie);
+    // }
   }
 }
 </script>

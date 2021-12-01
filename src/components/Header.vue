@@ -40,39 +40,49 @@ export default {
       keyUrlApi: 'api_key=e99307154c6dfb0b4750f6603256716d',
       defaultUrlFilm: 'https://api.themoviedb.org/3/search/movie?',
       defaultUrlTv: 'https://api.themoviedb.org/3/search/tv?',
-      isLoading: false
+      isLoadingFilm: false,
+      isLoadingSerie: false,
+
     }
   },
   methods:{
       getApi(){
       
       // chiamata per i film
-      axios.get(`${this.defaultUrlFilm}${this.keyUrlApi}&&query=${this.userSearch}`)
+      axios.get(`${this.defaultUrlFilm}${this.keyUrlApi}&query=${this.userSearch}`)
       .then(r =>{
-        this.isLoading = true;
 
         this.listFilms = r.data.results;
 
-        console.log('lista dei film: ',this.listFilms);
+        // console.log('lista dei film: ',this.listFilms);
 
         // faccio l'emit per passarlo al padre (app.vue)
         this.$emit('search', this.listFilms);
+
+         // *******
+        this.isLoadingFilm = true;
+
+        this.$emit('loadingFilm', this.isLoadingFilm);
       })
       .catch( e => {
-        console.log(e);
+        console.log('errore!',e);
       });
 
       // seconda chiamata per le serie Tv
-      axios.get(`${this.defaultUrlTv}${this.keyUrlApi}&&query=${this.userSearch}`)
+      axios.get(`${this.defaultUrlTv}${this.keyUrlApi}&query=${this.userSearch}`)
       .then(r =>{
-        this.isLoading = true;
 
         this.listSeries = r.data.results;
 
-        console.log('lista delle serie tv: ',this.listSeries);
+        // console.log('lista delle serie tv: ',this.listSeries);
 
         // faccio l'emit per passarlo al padre (app.vue)
         this.$emit('searchTv', this.listSeries);
+
+        // *******
+        this.isLoadingSerie = true;
+
+        this.$emit('loadingTv', this.isLoadingSerie);
       })
       .catch( e => {
         console.log(e);
@@ -117,6 +127,10 @@ h1{
   color: $button-bg-color;
   padding-left: 20px;
   cursor: pointer;
+}
+
+h3{
+  color: white;
 }
 
 .button-input{
