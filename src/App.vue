@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     
-    <Header />
+    <Header @search= 'searchFilm'/>
     <Main />
 
   </div>
@@ -16,6 +16,18 @@ export default {
   components: {
     Header,
     Main
+  },
+
+  data(){
+    return{
+
+    }
+  },
+
+  methods:{
+    searchFilm(listFilms){
+      console.log('app.vue: ', listFilms);
+    }
   }
 }
 </script>

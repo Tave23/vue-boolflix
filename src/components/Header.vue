@@ -11,6 +11,7 @@
       <input 
       v-model="userFilm"
       class="form-control" 
+      @keyup.enter="getApi"
       type="text" placeholder="Inserisci il nome di un film...">
       <!-- button -->
       <button 
@@ -45,21 +46,25 @@ export default {
       .then(r =>{
         this.isLoading = true;
 
-        this.isLoading = r.data.results;
-        console.log(this.isLoading);
+        alert('ho cliccato');
+
+        this.listFilms = r.data.results;
+
+        // console.log(this.listFilms);
+
+        // faccio l'emit per passarlo al padre (app.vue)
+        this.$emit('search', this.listFilms)
       })
       .catch( e => {
         console.log(e);
       })
-
-    }
+    },
+    
   }
 }
 
 
 </script>
-
-
 
 
 <style scoped lang="scss">
