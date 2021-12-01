@@ -9,7 +9,7 @@
     <div class="input-header">
       <!-- input title film -->
       <input 
-      v-model="userFilm"
+      v-model="userSearch"
       class="form-control" 
       @keyup.enter="getApi"
       type="text" placeholder="Inserisci il nome di un film...">
@@ -34,29 +34,49 @@ export default {
   },
   data(){
     return{
-      userFilm: '',
+      userSearch: '',
       listFilms: [],
+      listSeries: [],
       keyUrlApi: 'api_key=e99307154c6dfb0b4750f6603256716d',
-      defaultUrl: 'https://api.themoviedb.org/3/search/movie?'
+      defaultUrlFilm: 'https://api.themoviedb.org/3/search/movie?',
+      defaultUrlTv: 'https://api.themoviedb.org/3/search/tv?',
+      isLoading: false
     }
   },
   methods:{
       getApi(){
-
-      axios.get(`${this.defaultUrl}${this.keyUrlApi}&query=${this.userFilm}`)
+      
+      // chiamata per i film
+      axios.get(`${this.defaultUrlFilm}${this.keyUrlApi}&&query=${this.userSearch}`)
       .then(r =>{
         this.isLoading = true;
 
         this.listFilms = r.data.results;
 
-        // console.log(this.listFilms);
+        console.log('lista dei film: ',this.listFilms);
 
         // faccio l'emit per passarlo al padre (app.vue)
-        this.$emit('search', this.listFilms)
+        this.$emit('search', this.listFilms);
       })
       .catch( e => {
         console.log(e);
+      });
+
+      // seconda chiamata per le serie Tv
+      axios.get(`${this.defaultUrlTv}${this.keyUrlApi}&&query=${this.userSearch}`)
+      .then(r =>{
+        this.isLoading = true;
+
+        this.listSeries = r.data.results;
+
+        console.log('lista delle serie tv: ',this.listSeries);
+
+        // faccio l'emit per passarlo al padre (app.vue)
+        this.$emit('searchTv', this.listSeries);
       })
+      .catch( e => {
+        console.log(e);
+      });
     },
     
   }

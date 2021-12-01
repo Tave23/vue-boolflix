@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     
-    <Header @search= 'searchFilm'/>
-    <Main :researchFilmMain='listFilms2'/>
+    <Header @search= 'searchFilm' @searchTv= 'searchSeries'/>
+    <Main :researchFilmMain='listFilms2' :researchSeriesMain='listSeries2'/>
 
   </div>
 </template>
@@ -20,7 +20,8 @@ export default {
 
   data(){
     return{
-      listFilms2: []
+      listFilms2: [],
+      listSeries2: [],
     }
   },
 
@@ -29,6 +30,12 @@ export default {
       console.log('app.vue ', listFilms);
 
       this.listFilms2 = listFilms
+      console.log('nuovo array dentro app.vue ',this.listFilms2);
+    },
+    searchSeries(listSeries){
+      console.log('app.vue ', listSeries);
+
+      this.listSeries2 = listSeries
       console.log('nuovo array dentro app.vue ',this.listFilms2);
     }
   }
