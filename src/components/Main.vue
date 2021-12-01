@@ -5,7 +5,10 @@
    :key="film.key"
    class="card-film"> 
 
-      <h4>Titolo: {{film.title}}</h4>
+      <span class="title">
+         <p>Titolo: </p>
+         <h2>{{film.title}}</h2>
+      </span>
       <p>Titolo originale: {{film.original_title}}</p>
       <p>Lingua: {{film.original_language}}</p>
       <p>Voto: {{film.vote_average}}</p>
@@ -42,11 +45,13 @@ export default {
 }
 
 p,
-h4{
+h4,
+h2{
    color: white;
 }
 
-.card-film{
+.card-film,
+.title{
    padding: 20px;
    text-align: center;
 }
