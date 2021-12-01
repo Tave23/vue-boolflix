@@ -37,16 +37,15 @@ export default {
       userFilm: '',
       listFilms: [],
       keyUrlApi: 'api_key=e99307154c6dfb0b4750f6603256716d',
+      defaultUrl: 'https://api.themoviedb.org/3/search/movie?'
     }
   },
   methods:{
       getApi(){
 
-      axios.get(`https://api.themoviedb.org/3/search/movie?${this.keyUrlApi}&query=${this.userFilm}`)
+      axios.get(`${this.defaultUrl}${this.keyUrlApi}&query=${this.userFilm}`)
       .then(r =>{
         this.isLoading = true;
-
-        alert('ho cliccato');
 
         this.listFilms = r.data.results;
 

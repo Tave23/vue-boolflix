@@ -1,6 +1,8 @@
 <template>
   <div class="main">
-      main
+
+     <p>{{researchFilmMain}}</p>
+
   </div>
 </template>
 
@@ -8,7 +10,13 @@
 export default {
   name: 'Main',
   props: {
-    
+   researchFilmMain: Array
+  },
+  mounted(){
+     
+  },
+  methods:{
+     
   }
 }
 </script>
@@ -20,6 +28,7 @@ export default {
    width: 100vw;
    background: rgb(0,0,0);
    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(255,10,0,1) 100%);
+   overflow-y: scroll;
 }
 
 </style>
