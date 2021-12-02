@@ -11,15 +11,21 @@
             v-for="film in researchFilmMain"
             :key="film.key"
             class="col-md-3 col-sm-4 col-8 flip-box">
+               <!-- immagine copertina -->
                <div class="front" :style="{ backgroundImage: `url('${urlBasePoster}${film.poster_path}')` }">
+               <!-- // immagine copertina -->
                <div class="content">
+                  <!-- titolo nel front se non ho la copertina -->
                   <div
+                  class="cover-title"
                   v-if="film.poster_path == null">
                      <h4>{{film.title}}</h4>
+                     <p>Copertina non disponibile</p>
                   </div>
                   <div
                   v-else>
                   </div><br>
+                  <!-- // titolo nel front se non ho la copertina -->
                   <span class="click-for-more">
                   </span>
                </div>
@@ -70,8 +76,10 @@
                <div class="front" :style="{ backgroundImage: `url('${urlBasePoster}${serie.poster_path}')` }">
                <div class="content">
                   <div
+                  class="cover-title"
                   v-if="serie.poster_path == null">
                      <h4>{{serie.name}}</h4>
+                     <p>Copertina non disponibile</p>
                   </div>
                   <div
                   v-else>
@@ -183,6 +191,7 @@ export default {
    width: 20%;
    min-height: 300px;
    min-width: 250px;
+   max-width: 250px;
    border: 1px solid black;
    margin-right: 10px;
    margin-top: 15px;
@@ -223,6 +232,18 @@ h2{
    padding-bottom: 10px;
 }
 
+.cover-title{
+   display: flex;
+   justify-content: space-between;
+   flex-direction: column;
+   height: 100%;
+}
+
+.cover-title p{
+   font-size: 12px;
+}
+
+// ********
 // flipcard
 body {
     display: flex;
