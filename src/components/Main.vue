@@ -13,7 +13,13 @@
             class="col-md-3 col-sm-4 col-8 flip-box">
                <div class="front" :style="{ backgroundImage: `url('${urlBasePoster}${film.poster_path}')` }">
                <div class="content">
-                  <br>
+                  <div
+                  v-if="film.poster_path == null">
+                     <h4>{{film.title}}</h4>
+                  </div>
+                  <div
+                  v-else>
+                  </div><br>
                   <span class="click-for-more">
                   </span>
                </div>
@@ -63,7 +69,13 @@
                <!-- FRONTE CARD -->
                <div class="front" :style="{ backgroundImage: `url('${urlBasePoster}${serie.poster_path}')` }">
                <div class="content">
-                  <br>
+                  <div
+                  v-if="serie.poster_path == null">
+                     <h4>{{serie.name}}</h4>
+                  </div>
+                  <div
+                  v-else>
+                  </div><br>
                   <span class="click-for-more">
                   </span>
                </div>
@@ -116,9 +128,9 @@ export default {
    data(){
       return{
          // da cambiare in false!!!!!!!!*******+
-         emptyFilm: true, 
+         emptyPosterFilm: false, 
 
-         emptySerie: true,
+         emptyPosterSerie: false,
 
          urlBasePoster: 'https://image.tmdb.org/t/p/w342'
       }
@@ -204,14 +216,12 @@ h2{
 
 .card-film,
 .title{
-   padding: 0 20px;
    text-align: left;
 }
 
 .original-title{
    padding-bottom: 10px;
 }
-
 
 // flipcard
 body {
@@ -226,7 +236,7 @@ body {
 }
 .flip-box {
   display: flex;
-  align-content: stretch;
+  align-content: left;
   min-height: 300px;
   min-width: 240px;
   flex-wrap: wrap;
@@ -255,8 +265,8 @@ body {
     background-color: #1b2d61;
     color: white;
     display: flex;
-    justify-content: center;
-    align-content: center;
+    justify-content: left;
+    padding: 5px 10px;
     flex: 0 0 100%;
     -webkit-transition: all 1.5s cubic-bezier(.5,1,.5,1);
     transition: all 1.5s cubic-bezier(.5,1.3,.5,1.3);
@@ -282,7 +292,7 @@ body {
       left: 0;
       width: 30px;
       height: 30px;
-      border: 15px solid transparent;
+      border: 10px solid transparent;
       border-bottom-color: white;
       border-left-color: white;
     }
@@ -310,13 +320,16 @@ body {
   
   .content {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items: left;
     flex-direction: column;
-    -webkit-transform: translateZ(50px);
-            transform: translateZ(50px);
     text-shadow: 0px 0px 2px black;
   
+  }
+
+  .content .title{
+     margin-bottom: 15px;
+     text-align: left;
   }
 }
 </style>
