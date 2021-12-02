@@ -11,9 +11,9 @@
             v-for="film in researchFilmMain"
             :key="film.key"
             class="col-md-3 col-sm-4 col-8 flip-box">
-               <div class="front" style="background-image: url(https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&h=350);">
+               <div class="front" :style="{ backgroundImage: `url('${urlBasePoster}${film.poster_path}')` }">
                <div class="content">
-                  <h4>{{film.title}}</h4><br>
+                  <br>
                   <span class="click-for-more">
                   </span>
                </div>
@@ -61,9 +61,9 @@
             :key="serie.key"
             class="col-md-3 col-sm-4 col-8 flip-box">
                <!-- FRONTE CARD -->
-               <div class="front" style="background-image: url(https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?auto=compress&cs=tinysrgb&h=350);">
+               <div class="front" :style="{ backgroundImage: `url('${urlBasePoster}${serie.poster_path}')` }">
                <div class="content">
-                  <h4>{{serie.name}}</h4><br>
+                  <br>
                   <span class="click-for-more">
                   </span>
                </div>
@@ -120,7 +120,7 @@ export default {
 
          emptySerie: true,
 
-         urlBasePoster: 'https://image.tmdb.org/t/p/'
+         urlBasePoster: 'https://image.tmdb.org/t/p/w342'
       }
    },
    mounted(){
@@ -302,9 +302,9 @@ body {
       right: 0;
       width: 30px;
       height: 30px;
-      border: 15px solid #cecece;
-      border-bottom-color: white;
-      border-right-color: white;
+      border: 15px solid transparent;
+      border-bottom:10px solid white;
+      border-right:10px solid white;
     }
   }
   
