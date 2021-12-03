@@ -33,28 +33,31 @@
                <div class="back">
                <div class="content">
                   <span class="title">
-                     <p>Titolo: </p>
                      <h2>{{film.title}}</h2>
                   </span>
-                  <p class="original-title">
-                     Titolo originale: {{film.original_title}}
-                  </p>
+                  <div class="original-title">
+                     <h5>Titolo originale:</h5>
+                     <h4>{{film.original_title}}</h4>
+                  </div>
                   
                   <!-- lingua dinamica -->
-                  <div v-if="film.original_language === 'it'" class="lingua">
-                     <p>Lingua: </p><img src="../assets/it.png" alt="Italia" class="img-lingua">
+                  <div v-if="flagList.includes(film.original_language)" class="flagLang">
+                     <img :src="require(`../assets/${film.original_language}.png`)" alt="Italia" class="img-lingua">
                   </div>
 
-                  <div v-else-if="film.original_language === 'en'" class="lingua">
-                     <p>Lingua: </p><img src="../assets/en.png" alt="England" class="img-lingua">
-                  </div>
-
-                  <div v-else>
+                  <div v-else class="flagLang">
                      <p>Lingua: {{film.original_language}}</p>
                   </div>
                   <!-- !lingua dinamica -->
 
-                  <p>Voto: {{film.vote_average}}</p>
+                  <!-- stelline in base al voto -->
+                  <div class="vote">
+                     <i 
+                     v-for="(star, index) in 5" :key="index"
+                     :class="index < Math.round(film.vote_average/2) ? 'fas' : 'far' "
+                     class="fa-star"></i>
+                  </div>
+                  <!-- // stelline in base al voto -->
                </div>
                </div>
             </div>
@@ -92,7 +95,6 @@
                <div class="back">
                <div class="content">
                   <span class="title">
-                     <p>Titolo: </p>
                      <h2>{{serie.name}}</h2>
                   </span>
                   <p class="original-title">
@@ -100,20 +102,24 @@
                   </p>
                   
                   <!-- lingua dinamica -->
-                  <div v-if="serie.original_language === 'it'" class="lingua">
-                     <p>Lingua: </p><img src="../assets/it.png" alt="Italia" class="img-lingua">
+                  <div v-if="flagList.includes(serie.original_language)" class="flagLang">
+                     <img :src="require(`../assets/${serie.original_language}.png`)" alt="Italia" class="img-lingua">
                   </div>
 
-                  <div v-else-if="serie.original_language === 'en'" class="lingua">
-                     <p>Lingua: </p><img src="../assets/en.png" alt="England" class="img-lingua">
-                  </div>
-
-                  <div v-else>
+                  <div v-else class="flagLang">
                      <p>Lingua: {{serie.original_language}}</p>
                   </div>
                   <!-- !lingua dinamica -->
 
-                  <p>Voto: {{serie.vote_average}}</p>
+                  <!-- stelline in base al voto -->
+                  <div class="vote">
+                     <i 
+                     v-for="(star, index) in 5" :key="index"
+                     :class="index < Math.round(serie.vote_average/2) ? 'fas' : 'far' "
+                     class="fa-star"></i>
+                  </div>
+                  <!-- // stelline in base al voto -->
+
                </div>
                </div>
             </div>
@@ -136,9 +142,10 @@ export default {
    data(){
       return{
          // da cambiare in false!!!!!!!!*******+
-         emptyPosterFilm: false, 
+         // emptyPosterFilm: false,
+         // emptyPosterSerie: false,
 
-         emptyPosterSerie: false,
+         flagList:['en', 'it'],
 
          urlBasePoster: 'https://image.tmdb.org/t/p/w342'
       }
@@ -211,6 +218,14 @@ h2{
    color: white;
 }
 
+.flagLang{
+   display: flex;
+}
+
+.flagLang img{
+   margin-left: 5px
+}
+
 .lingua{
    display: flex;
    justify-content: left;
@@ -243,6 +258,10 @@ h2{
    font-size: 12px;
 }
 
+.vote{
+   margin-top: 5px;
+}
+
 // ********
 // flipcard
 body {
@@ -262,7 +281,7 @@ body {
   min-width: 240px;
   flex-wrap: wrap;
   position: relative;
-  border: 10px solid transparent;
+  border: 7px solid transparent;
   padding:0;
   border-top: 0;  
   -webkit-perspective: 1000;
@@ -313,7 +332,7 @@ body {
       left: 0;
       width: 30px;
       height: 30px;
-      border: 10px solid transparent;
+      border: 7px solid transparent;
       border-bottom-color: white;
       border-left-color: white;
     }
@@ -333,9 +352,9 @@ body {
       right: 0;
       width: 30px;
       height: 30px;
-      border: 15px solid transparent;
-      border-bottom:10px solid white;
-      border-right:10px solid white;
+      border: 7px solid transparent;
+      border-bottom:7px solid white;
+      border-right:7px solid white;
     }
   }
   
