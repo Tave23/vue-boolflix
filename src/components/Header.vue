@@ -34,12 +34,21 @@ export default {
   },
   data(){
     return{
+      // ciò che cerca l'utente
       userSearch: '',
+
+      // array in cui andranno i risultati della ricerca
       listFilms: [],
       listSeries: [],
+
+      // api Key personale
       keyUrlApi: 'api_key=e99307154c6dfb0b4750f6603256716d',
+
+      // due pezzi BASE dei link per la ricerca
       defaultUrlFilm: 'https://api.themoviedb.org/3/search/movie?',
       defaultUrlTv: 'https://api.themoviedb.org/3/search/tv?',
+
+      // due link per la ricerca di film/serie popolari
       urlResearchBaseFilm: 'https://api.themoviedb.org/3/movie/popular?api_key=7a832fe130a8b7a500ccbe8608c29904&language=en-US&page=1',
       urlResearchBaseSerie: 'https://api.themoviedb.org/3/tv/popular?api_key=7a832fe130a8b7a500ccbe8608c29904&language=en-US&page=1',
 
@@ -49,7 +58,9 @@ export default {
     this.defaultPopular();
   },
   methods:{
-    // funzione di default
+    // *************
+    // funzione di default prima della ricerca dell'utente
+    // *************
       defaultPopular(){
 
         // chiamata per i film
@@ -93,6 +104,8 @@ export default {
         });
 
       },
+
+
     // funzione quando si preme invio o si clicca sul button
       getApi(){
       

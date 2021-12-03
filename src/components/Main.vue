@@ -5,7 +5,19 @@
          <h2>Film</h2>
       </div>
 
-      <div class="container-film">
+      <!-- CONTAINER FILM -->
+      <!-- nel caso non ci fossero risultati... -->
+      <div 
+      v-if="researchSeriesMain.length == 0"
+      class="container-film error">
+         <h1>Nessun Film trovato!</h1>
+         <h4>Prova a modificare la ricerca</h4>
+      </div>
+      <!-- // nel caso non ci fossero risultati... -->
+
+      <div 
+      v-else
+      class="container-film">
          <div class="row flip-boxes">
             <div 
             v-for="film in researchFilmMain"
@@ -32,15 +44,18 @@
                </div>
                <div class="back">
                <div class="content">
+                  <!-- titolo film -->
                   <span class="title">
                      <h2>{{film.title}}</h2>
                   </span>
+                  <!-- // titolo film -->
+
                   <!-- titolo originale -->
                   <div class="original-title">
                      <h5>Titolo originale:</h5>
                      <h4>{{film.original_title}}</h4>
                   </div>
-                  <!-- titolo originale -->
+                  <!-- // titolo originale -->
                   
                   <!-- lingua dinamica -->
                   <div v-if="flagList.includes(film.original_language)" class="flagLang">
@@ -50,7 +65,7 @@
                   <div v-else class="flagLang">
                      <p>Lingua: {{film.original_language}}</p>
                   </div>
-                  <!-- !lingua dinamica -->
+                  <!-- // lingua dinamica -->
 
                   <!-- stelline in base al voto -->
                   <div class="vote">
@@ -72,13 +87,25 @@
             </div>
          </div>
       </div>
+      <!-- //CONTAINER FILM -->
 
       <div class="categories">
          <h2>Serie TV</h2>
       </div>
 
       <!-- CONTAINER SERIE TV -->
-      <div class="container-film">
+      <!-- nel caso non ci fossero risultati... -->
+      <div 
+      v-if="researchSeriesMain.length == 0"
+      class="container-film error">
+         <h1>Nessuna Serie Tv trovata!</h1>
+         <h4>Prova a modificare la ricerca</h4>
+      </div>
+      <!-- nel caso non ci fossero risultati... -->
+
+      <div 
+      v-else
+      class="container-film">
          <div class="row flip-boxes">
             <div 
             v-for="serie in researchSeriesMain"
@@ -90,8 +117,10 @@
                   <div
                   class="cover-title"
                   v-if="serie.poster_path == null">
+                  <!-- titolo se copertina non disponibile -->
                      <h4>{{serie.name}}</h4>
                      <p>Copertina non disponibile</p>
+                  <!-- // titolo se copertina non disponibile -->
                   </div>
                   <div
                   v-else>
@@ -104,15 +133,18 @@
                <!-- RETRO CARD -->
                <div class="back">
                <div class="content">
+                  <!-- titolo serie -->
                   <span class="title">
                      <h2>{{serie.name}}</h2>
                   </span>
+                  <!-- // titolo serie -->
+
                   <!-- titolo originale -->
                   <div class="original-title">
                      <h5>Titolo originale:</h5>
                      <h4>{{serie.original_name}}</h4>
                   </div>
-                  <!-- titolo originale -->
+                  <!-- // titolo originale -->
                   
                   <!-- lingua dinamica -->
                   <div v-if="flagList.includes(serie.original_language)" class="flagLang">
@@ -122,7 +154,7 @@
                   <div v-else class="flagLang">
                      <p>Lingua: {{serie.original_language}}</p>
                   </div>
-                  <!-- !lingua dinamica -->
+                  <!-- // lingua dinamica -->
 
                   <!-- stelline in base al voto -->
                   <div class="vote">
@@ -211,6 +243,15 @@ export default {
    width: 90%;
    margin: 0 auto;
    margin-bottom: 20px;
+}
+
+.error h1{
+   color: white;
+}
+
+.error{
+   display: block;
+   margin-top: 50px;
 }
 
 p,
