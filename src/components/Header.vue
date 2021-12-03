@@ -40,12 +40,60 @@ export default {
       keyUrlApi: 'api_key=e99307154c6dfb0b4750f6603256716d',
       defaultUrlFilm: 'https://api.themoviedb.org/3/search/movie?',
       defaultUrlTv: 'https://api.themoviedb.org/3/search/tv?',
-      isLoadingFilm: false,
-      isLoadingSerie: false,
+      urlResearchBaseFilm: 'https://api.themoviedb.org/3/movie/popular?api_key=7a832fe130a8b7a500ccbe8608c29904&language=en-US&page=1',
+      urlResearchBaseSerie: 'https://api.themoviedb.org/3/tv/popular?api_key=7a832fe130a8b7a500ccbe8608c29904&language=en-US&page=1',
 
     }
   },
+  mounted(){
+    this.defaultPopular();
+  },
   methods:{
+    // funzione di default
+      defaultPopular(){
+
+        // chiamata per i film
+        axios.get(`${this.urlResearchBaseFilm}`)
+        .then(r =>{
+
+          this.listFilms = r.data.results;
+
+          // console.log('lista dei film: ',this.listFilms);
+
+          // faccio l'emit per passarlo al padre (app.vue)
+          this.$emit('search', this.listFilms);
+
+          // *******
+          this.isLoadingFilm = true;
+
+          this.$emit('loadingFilm', this.isLoadingFilm);
+        })
+        .catch( e => {
+          console.log('errore!',e);
+        });
+
+        // seconda chiamata per le serie Tv
+        axios.get(`${this.urlResearchBaseSerie}`)
+        .then(r =>{
+
+          this.listSeries = r.data.results;
+
+          // console.log('lista delle serie tv: ',this.listSeries);
+
+          // faccio l'emit per passarlo al padre (app.vue)
+          this.$emit('searchTv', this.listSeries);
+
+          // *******
+          this.isLoadingSerie = true;
+
+          this.$emit('loadingTv', this.isLoadingSerie);
+        })
+        .catch( e => {
+          console.log(e);
+        });
+
+      },
+    // funzione quando si preme invio o si clicca sul button
       getApi(){
       
       // chiamata per i film
