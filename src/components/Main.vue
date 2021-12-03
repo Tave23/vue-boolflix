@@ -35,10 +35,12 @@
                   <span class="title">
                      <h2>{{film.title}}</h2>
                   </span>
+                  <!-- titolo originale -->
                   <div class="original-title">
                      <h5>Titolo originale:</h5>
                      <h4>{{film.original_title}}</h4>
                   </div>
+                  <!-- titolo originale -->
                   
                   <!-- lingua dinamica -->
                   <div v-if="flagList.includes(film.original_language)" class="flagLang">
@@ -98,15 +100,19 @@
                   </span>
                </div>
                </div>
+               <!-- // FRONTE CARD -->
                <!-- RETRO CARD -->
                <div class="back">
                <div class="content">
                   <span class="title">
                      <h2>{{serie.name}}</h2>
                   </span>
-                  <p class="original-title">
-                     Titolo originale: {{serie.original_name}}
-                  </p>
+                  <!-- titolo originale -->
+                  <div class="original-title">
+                     <h5>Titolo originale:</h5>
+                     <h4>{{serie.original_name}}</h4>
+                  </div>
+                  <!-- titolo originale -->
                   
                   <!-- lingua dinamica -->
                   <div v-if="flagList.includes(serie.original_language)" class="flagLang">
@@ -132,7 +138,7 @@
                      <p>{{serie.overview}}</p>
                   </div>
                   <!-- // riassunto programma -->
-
+                  <!-- // RETRO CARD -->
                </div>
                </div>
             </div>
@@ -198,7 +204,7 @@ export default {
    margin-right: 10px;
    margin-top: 15px;
    margin-bottom: 10px;
-   background-color: rgb(59, 2, 0);
+   background-color: rgb(37, 1, 0);
 }
 
 .categories{
@@ -240,6 +246,10 @@ h2{
 
 .original-title{
    padding-bottom: 10px;
+}
+
+.original-title h5{
+   font-size: 12px;
 }
 
 .cover-title{
