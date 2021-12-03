@@ -58,6 +58,13 @@
                      class="fa-star"></i>
                   </div>
                   <!-- // stelline in base al voto -->
+
+                  <!-- riassunto programma -->
+                  <div class="overview">
+                     <p>{{film.overview}}</p>
+                  </div>
+                  <!-- // riassunto programma -->
+
                </div>
                </div>
             </div>
@@ -120,6 +127,12 @@
                   </div>
                   <!-- // stelline in base al voto -->
 
+                  <!-- riassunto programma -->
+                  <div class="overview">
+                     <p>{{serie.overview}}</p>
+                  </div>
+                  <!-- // riassunto programma -->
+
                </div>
                </div>
             </div>
@@ -141,33 +154,15 @@ export default {
    },
    data(){
       return{
-         // da cambiare in false!!!!!!!!*******+
-         // emptyPosterFilm: false,
-         // emptyPosterSerie: false,
-
+         // array delle flag che ho
          flagList:['en', 'it'],
 
          urlBasePoster: 'https://image.tmdb.org/t/p/w342'
       }
    },
    mounted(){
-
-      this.emptyArrayTv
-
-      // emptyArraySerie(){
-      //    if (this.researchSeriesMain == '') {
-      //       this.emptySerie == true;
-      //       console.log(this.emptySerie);
-      //    }
-      //    return this.emptySerie
-      // }
    },
    methods:{
-      emptyArrayTv(){
-         if (this.researchFilmMain.length === 0) {
-            this.emptySerie = true
-         }
-      },
    }
 
 }
@@ -259,6 +254,18 @@ h2{
 }
 
 .vote{
+   margin-top: 5px;
+}
+
+.fas{
+   color: yellow;
+}
+
+.overview{
+   height: fit-content;
+   overflow-y: scroll;
+   padding: 10px 0 5px;
+   font-size: 12px;
    margin-top: 5px;
 }
 
